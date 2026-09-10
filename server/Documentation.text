@@ -1,0 +1,21 @@
+start project create:
+-------------------
+
+npm init -y 
+
+
+
+
+installation dependancies:
+-------------------------
+express
+dotenv
+mongoose
+cors
+helmet
+morgan-->http request logging 
+express-rate-limit -->uer limited 
+jsonwebtoken
+bcrypt
+
+--save-dev nodemon
