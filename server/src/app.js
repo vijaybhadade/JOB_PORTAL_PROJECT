@@ -3,10 +3,12 @@ const cors= require('cors');
 const helmet=require('helmet');
 const morgan= require('morgan');
 const rateLimit=require('express-rate-limit');
-const env=require("./config/env");
+const authRoutes= require("./routes/authRoutes");
+
+const env=require("./config/env.js");
 
 const app=express();
-const port=
+const port=env.PORT;
 //security middleware
 app.use(helmet());
 
@@ -21,15 +23,14 @@ app.use(cors({
 }));
 
 //Rate Limiting
-const apiLimiter=rateLimit({
-    windowMs:15*60*1000,
-    max:200,
-    standarHeaders:true,
-    legacyHeaders:false,
-    message:
-    {
-        success:false,
-         message:"Too many request. Please again leter!",
+const apiLimiter = rateLimit({
+    windowMs: 15 * 60 * 1000,
+    max: 200,
+    standardHeaders: true,
+    legacyHeaders: false,
+    message: {
+        success: false,
+        message: "Too many requests. Please try again later!",
     }
 });
 
@@ -52,22 +53,32 @@ app.use(express.urlencoded({
 app.use(morgan("dev"));
 
 //Health checkup to check resonponse time from server to user 
-app.get("/api/health",(req,res)=>{
+app.get("/api/health", (req, res) => {
     res.status(200).json({
-        success:true,
-        message:"Talent API is running",
-        enviroment:env.noddEnv,
+        success: true,
+        message: "Talent API is running",
+        environment: env.nodeEnv,
         timestamp: new Date().toString(),
     });
 });
 
-//404 headers
+app.use("/api/auth",authRoutes);
 
+//404 headers
 app.use((req,res)=>{
     res.status(404).json({
         success:false,
         message:`Route not found:${req.method} and origin ${req.originalUrl}`
     });
 });
+app.use((error,req,res)=>{
+    console.error("api error",error);
+    const statusCode= error.statusCode || 500;
 
+    res.status(statusCode).json({
+        success:false,
+        message: error.message || "Server internal errror"
+    });
+   
+});
 module.exports=app;

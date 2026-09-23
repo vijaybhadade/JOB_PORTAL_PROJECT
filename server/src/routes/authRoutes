@@ -1,0 +1,21 @@
+const express= require("express");
+const authController=require("../controllers/authController.js");
+
+const{registerValidation,loginValidation,validateRequest}= require("../validators/authValidator.js");
+
+const router=express.Router();
+
+
+// Post register router 
+router.post("/register",registerValidation,validateRequest,authController.register);
+
+//login 
+router.post("/login",loginValidation,validateRequest,authController.login);
+
+//Post /api/auth/refresh
+router.post("/refresh",authController.refresh);
+
+//post /api/auth/logout 
+router.post("/logout",authController.logout);
+
+module.exports=router;

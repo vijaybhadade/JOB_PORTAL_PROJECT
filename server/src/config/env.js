@@ -5,7 +5,7 @@ const env= {
     nodeEnv:process.env.NODE_ENV || "development",
     PORT:Number(process.env.PORT) || 5000,
 
-    mongoUrl=process.env.MONGODB_URI,
+    mongoUrl:process.env.MONGODB_URI,
 
     jwtSecret:process.env.JWT_SECRET,
 
@@ -13,7 +13,7 @@ const env= {
 
     refressToken:process.env.REFRESH_TOKEN_EXPIRES_IN || "15d",
     
-    clientUrl=process.env.CLIENT_URL || "http://localhost:5173",
+    clientUrl:process.env.CLIENT_URL || "http://localhost:5173",
 };
 
 module.exports=env;

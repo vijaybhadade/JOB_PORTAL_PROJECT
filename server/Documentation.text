@@ -19,3 +19,34 @@ jsonwebtoken
 bcrypt
 
 --save-dev nodemon
+
+
+
+
+Authentication
+register
+input validation
+email uniqueness 
+bcrypt password hashing
+user creation
+
+login 
+verify username and password
+access token 
+fresh token 
+logout
+
+
+
+---------------------------------------
+Authentication and authorization:
+---------------------------------
+
+npm i express-validator  
+
+
+create RefreshToekn.js 
+and create token.js
+
+in validator 
+authValidator
