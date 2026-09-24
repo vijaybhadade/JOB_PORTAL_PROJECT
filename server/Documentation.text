@@ -50,3 +50,6 @@ and create token.js
 
 in validator 
 authValidator
+
+
+serverice--> controler-->routes-->register routes.

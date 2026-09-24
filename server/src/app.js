@@ -4,6 +4,7 @@ const helmet=require('helmet');
 const morgan= require('morgan');
 const rateLimit=require('express-rate-limit');
 const authRoutes= require("./routes/authRoutes");
+const userRoutes=require("./routes/userRoutes")
 
 const env=require("./config/env.js");
 
@@ -63,6 +64,7 @@ app.get("/api/health", (req, res) => {
 });
 
 app.use("/api/auth",authRoutes);
+app.use("/api/users",userRoutes);
 
 //404 headers
 app.use((req,res)=>{
